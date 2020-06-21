@@ -15,3 +15,11 @@ ScatterPlot Matrix for Auto-MPG Dataset
 Adjacency Matrix for Musician network dataset 
 Parallel Coordinates for remodeled countries of the world dataset
 Treemap for remodeled auto-mpg dataset
+
+Requirements
+========================================
+The project requires Browser and server to run files on localhost or any server.3.
+
+Compilation/Execution Guide
+========================================
+1. Run the .html files on any server in browser. 
