@@ -1,0 +1,272 @@
+<html> 
+  <head> 
+<!--       <head> -->
+<!--   <link id="tree" rel="import" href="https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/3b7f20993bba47963745df0043d428de47fbd613/treemap.html">
+      <link id="tre" rel="import" href="https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/3b7f20993bba47963745df0043d428de47fbd613/treemap.html"> -->
+<!-- </head> -->
+       <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+      <script src="https://d3js.org/d3.v3.js"></script>
+<!--       <script src="https://d3js.org/d3.v4.js"></script> -->
+    <script> 
+//          $('#includedContent input[type=radio]').change(function(){
+//       if ($(this).val() == 'male')
+//       {
+// //     $(function(){
+//       $("#includedContent").load("https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/3b7f20993bba47963745df0043d428de47fbd613/treemap.html"); }
+
+//     });
+    </script> 
+      
+<!-- @section Scripts{ -->
+<!-- @Scripts.Render("~/bundles/jqueryval") -->
+     
+<script type="text/javascript">
+
+    function change(arr) {
+var el = document.getElementById('SelectO');
+el.options.length = 0;
+for(var i = 0; i< arr.length; i++ ) {
+el.options[el.options.length] = new Option( arr[i], arr[i]);
+}
+}
+    
+$(document).ready(function () {
+    
+    
+// var nextButton = document.getElementById("nextButton");
+// var multipleSetWindow = "window.location='multiSet.html'"
+document.getElementById("Treemap").style.display="none";
+    document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+    
+function show(param_div_id) {
+    document.getElementById('main_place').html = document.getElementById(param_div_id).html;
+  }
+    
+    
+    $(btn).click(function () {
+        var singleMultiContainer = document.getElementById("SelectO");
+        var singleMultiValue = singleMultiContainer.options[singleMultiContainer.selectedIndex].value;
+
+        if (singleMultiValue == "Sunburst map") {
+            console.log("if");
+           
+            document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+        document.getElementById("Sunburstmap").style.display="inline-block";
+            document.getElementById("f").style.display="none";
+             show('Sunburstmap');
+        }
+//         document.getElementById('Vis').src = "https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/0d3e791dc4802259d2f4d2a3020e309bfa1e2f1f/treemap.html";}
+//             document.getElementById("Create").innerHTML='<object type="text/html" data="https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4ebea7a69239ca4642e9c3f58a45056ac7bf3610/sunburst.html" ></object>';}
+// //         $("#Create").load("https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4ebea7a69239ca4642e9c3f58a45056ac7bf3610/sunburst.html"); 
+//             $("#Create").load("https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/0d3e791dc4802259d2f4d2a3020e309bfa1e2f1f/treemap.html"); 
+//             $("#Create").load("https://gist.githubusercontent.com/Dhvani-Katkoria/3f0c7d418fed783a67f5e06a5a0e3838/raw/82070f48a97d7b70588288b7efc50e298d5ab14b/treemaporiginal.html");
+            
+//             console.log("if");}
+        
+    else if (singleMultiValue == "Treemap") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+        document.getElementById("f").style.display="none";
+    document.getElementById("Treemap").style.display="inline";
+        show('Treemap');
+    }
+        else if (singleMultiValue == "Parallel Coordinates") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";    
+            document.getElementById("Treemap").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+        document.getElementById("f").style.display="none";
+    document.getElementById("Pc").style.display="inline";
+        show('Pc');
+        }
+            else if (singleMultiValue == "Scatterplot Matrix") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";    
+        document.getElementById("f").style.display="none";
+                document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+    document.getElementById("Sm").style.display="inline";
+        show('Sm');
+            }
+                else if (singleMultiValue == "Adjacency Matrix") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";    
+        document.getElementById("f").style.display="none";
+                    document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+    document.getElementById("Am").style.display="inline";
+        show('Am');
+                } 
+                    else if (singleMultiValue == "Hierarchical to Multivariate") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";    
+        document.getElementById("f").style.display="none";
+                        document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Treemap_remodel").style.display="none";
+    document.getElementById("Pc_remodel").style.display="inline";
+        show('Pc_remodel');
+                    }
+                        else if (singleMultiValue == "Multivariate to Hierarchical") {
+    
+        console.log("elseppp");
+//         show('Sunburstmap');//document.getElementById("Sunburstmap").style.visibility="visible";
+    document.getElementById("Sunburstmap").style.display="none";    
+        document.getElementById("f").style.display="none";
+                            document.getElementById("Treemap").style.display="none";
+            document.getElementById("Pc").style.display="none";
+            document.getElementById("Sm").style.display="none";
+            document.getElementById("Am").style.display="none";
+            document.getElementById("Pc_remodel").style.display="none";
+    document.getElementById("Treemap_remodel").style.display="inline";
+        show('Treemap_model');
+                        
+//         $('#Treemap').replaceWith($('#Sunburstmap'));
+    }
+//     document.getElementById("Sunburstmap").style.visibility="visible"; 
+//         window.frames['Vis'].location.replace("https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4ebea7a69239ca4642e9c3f58a45056ac7bf3610/sunburst.html");
+//     document.getElementById('Vis').src = "https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4ebea7a69239ca4642e9c3f58a45056ac7bf3610/sunburst.html";}}
+    });
+    
+    });
+      </script>
+  </head> 
+
+  <body> 
+      <div id="Options" style="text-align:right; margin:0px auto 0px auto; width:200; height:300; float:right;">
+<form method="post">
+    <fieldset id="Group1" name="Group1">
+    <legend>Dataset Type</legend>
+    <input id="Radio1" name="Radio1" type="radio" value="MVD" onclick='change(["Parallel Coordinates","Scatterplot Matrix"])' />Multivariate Dataset<br />
+    <input id="Radio1" name="Radio1" type="radio" value="HD" onclick='change(["Treemap","Sunburst map"])'/>Hierarchichal Dataset <br />
+<input id="Radio1" name="Radio1" type="radio" value="ND" onclick='change(["Adjacency Matrix"])'/>Network Dataset<br />
+  <input id="Radio1" name="Radio1" type="radio" value="RM" onclick='change(["Hierarchical to Multivariate","Multivariate to Hierarchical"])'/>Remodel dataset<br />
+    </fieldset><br/><br/>
+    
+    <fieldset id="Group2" name="Group2">
+    <legend>Visualizations available</legend>
+    <select id="SelectO" name="SelectO">
+    </select></fieldset></form>
+
+<input type="button" id="btn" class="btn btn-default" value="Generate">
+</div>
+
+      <div id="main_place" float="left">
+<!-- Hello -->
+<!--     <iframe is="x-frame-bypass"
+   src="https://gist.githubusercontent.com/Dhvani-Katkoria/3588a52b62b06e088438ea2d26cc81b0/raw/3d3316b6785ab457bb5de6f4f121403373dab69b/blank.html" 
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe> -->
+</div>
+    <div id="f" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+   src="https://gist.githubusercontent.com/Dhvani-Katkoria/3588a52b62b06e088438ea2d26cc81b0/raw/3d3316b6785ab457bb5de6f4f121403373dab69b/blank.html" 
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+<div id="Sunburstmap" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4d4ab09ef1157c892f27899f146bf7d62f2becef/sunburst.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      <div id="Treemap" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/0d3e791dc4802259d2f4d2a3020e309bfa1e2f1f/treemap.html"
+  height="1000" width="1100" allow="encrypted-media" > 
+          </iframe>
+</div>
+      
+      <div id="Pc" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/e769ab4522853f46f18e96a56b7b889a/raw/5cac69b270f6de8466ac3b737b11e20933bd77c9/parallel_coordinates.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      <div id="Sm" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/d07bd00b639b8c03796409f39aa274ce/raw/dfe329afa625d37daabdb481a6b8dd149042b2a4/scatterplot_matrix.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      <div id="Am" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/c6d1ffd2a74c45f9e3eae89ce984ec1e/raw/5978787fbaf3e3de39e76d454ca9929f33280a75/adjacency_matrix.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      <div id="Pc_remodel" style="" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/8984ba474c559d2e28aba3c899d10fdc/raw/24adea3e41b0763b76b624662a8c85b9e362796e/parallel_coords_remodeled.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      <div id="Treemap_remodel" style="display:none" float="left">
+<!-- Hello -->
+    <iframe is="x-frame-bypass"
+  src="https://gist.githubusercontent.com/Dhvani-Katkoria/d9572c79ccf488ebf07155eba33916cd/raw/15f5378998fbf2d516dabb88e149fa2f4919a92e/treemap_remodeled.html"
+  height="1000" width="1100" allow="encrypted-media" >
+</iframe>
+</div>
+      
+      
+<!-- https://gist.githubusercontent.com/Dhvani-Katkoria/d07bd00b639b8c03796409f39aa274ce/raw/dfe329afa625d37daabdb481a6b8dd149042b2a4/scatterplot_matrix.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/c6d1ffd2a74c45f9e3eae89ce984ec1e/raw/5978787fbaf3e3de39e76d454ca9929f33280a75/adjacency_matrix.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/d9572c79ccf488ebf07155eba33916cd/raw/15f5378998fbf2d516dabb88e149fa2f4919a92e/treemap_remodeled.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/8984ba474c559d2e28aba3c899d10fdc/raw/24adea3e41b0763b76b624662a8c85b9e362796e/parallel_coords_remodeled.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/e769ab4522853f46f18e96a56b7b889a/raw/5cac69b270f6de8466ac3b737b11e20933bd77c9/parallel_coordinates.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/ee73c57022da31321766e346312a73c2/raw/4d4ab09ef1157c892f27899f146bf7d62f2becef/sunburst.html
+      https://gist.githubusercontent.com/Dhvani-Katkoria/758530d7d252c7f9eb93d8877250c447/raw/dc1cb82a11904c1e3c4cd7f374cd566bf20c76cf/treemap.html -->
+<!-- }); -->
+  </body> 
+</html>

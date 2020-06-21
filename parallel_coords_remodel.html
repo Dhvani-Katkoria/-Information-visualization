@@ -1,0 +1,296 @@
+<head>
+    <style>
+a {
+  color: #454545;
+}
+a:hover {
+  color: #000;
+}
+ul {
+  margin: 0 20px;
+  padding: 0;
+}
+.dark {
+  background: #222;
+}
+#example {
+  min-height: 300px;
+  margin: 12px 0;
+}
+p {
+  width: 560px;
+}
+pre {
+  color: #444;
+  font-family: Ubuntu Mono, Monaco, monospace;
+  padding: 4px 8px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+}
+h1 small {
+  font-weight: normal;
+  font-size: 0.5em;
+}
+h3 {
+  margin-top: 40px;
+}
+.float {
+  float: left;
+}
+.centered {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+input {
+  font-size: 16px;
+}
+
+/* data table styles */
+  #grid { height: 240px; overflow:auto;}
+        .row{overflow:auto;}, .header { clear: left; font-size: 11px; line-height: 24px; height: 24px;}
+  .row:nth-child(odd) { background: rgba(0,0,0,0.05);overflow:auto; }
+  .header { font-weight: bold; position: fixed; background: #555;
+  color: #f1f1f1;}
+  .cell { float: left; overflow: hidden; white-space: nowrap; width: 160px; height: 18px; }
+  .col-0 { width: 120px; }
+
+  
+/* parcoords styles */
+.parcoords > svg, .parcoords > canvas { 
+  font: 11px "Source Code Pro", Consolas, monaco, monospace;
+  position: absolute;
+}
+.parcoords > canvas {
+  pointer-events: none;
+}
+
+.parcoords text.label {
+  cursor: default;
+}
+
+.parcoords rect.background {
+  fill: transparent;
+}
+.parcoords rect.background:hover {
+  fill: rgba(120,120,120,0.2);
+}
+.parcoords .resize rect {
+  fill: rgba(0,0,0,0.1);
+}
+.parcoords rect.extent {
+  fill: rgba(255,255,255,0.25);
+  stroke: rgba(0,0,0,0.6);
+}
+.parcoords .axis line, .parcoords .axis path {
+  fill: none;
+  stroke: #454545;
+  shape-rendering: crispEdges;
+}
+.parcoords canvas {
+  opacity: 1;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+}
+.parcoords canvas.faded {
+  opacity: 0.25;
+}
+.parcoords {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+        .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background:inherit;
+}
+    </style>
+</head>
+<body>
+    <h3> <center> Parallel Coordinates for Countries of the worlds Dataset </center></h3>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css">
+<!-- //interact with this variable from a javascript console -->
+<div id="example" class="parcoords" ></div>
+    <div id="grid"></div>
+    <script>
+    
+    
+    d3.divgrid = function(config) {
+  var columns = [];
+
+  var dg = function(selection) {
+    if (columns.length == 0) columns = d3.keys(selection.data()[0][0]);
+
+    // header
+    selection.selectAll(".header")
+        .data([true])
+      .enter().append("div")
+        .attr("class", "header")
+
+    var header = selection.select(".header")
+      .selectAll(".cell")
+      .data(columns);
+
+    header.enter().append("div")
+      .attr("class", function(d,i) { return "col-" + i; })
+      .classed("cell", true)
+
+    selection.selectAll(".header .cell")
+      .text(function(d) { return d; });
+
+    header.exit().remove();
+
+    // rows
+    var rows = selection.selectAll(".row")
+        .data(function(d) { return d; })
+
+    rows.enter().append("div")
+        .attr("class", "row")
+
+    rows.exit().remove();
+
+    var cells = selection.selectAll(".row").selectAll(".cell")
+        .data(function(d) { return columns.map(function(col){return d[col];}) })
+
+    // cells
+    cells.enter().append("div")
+      .attr("class", function(d,i) { return "col-" + i; })
+      .classed("cell", true)
+
+    cells.exit().remove();
+
+    selection.selectAll(".cell")
+      .text(function(d) { return d; });
+
+    return dg;
+  };
+
+  dg.columns = function(_) {
+    if (!arguments.length) return columns;
+    columns = _;
+    return this;
+  };
+
+  return dg;
+};
+    
+   
+    
+        </script>
+
+
+ <script>
+             window.onscroll = function() {myFunction()};
+
+var header2 = document.getElementById("example");
+var sticky = header2.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header2.classList.add("sticky");
+  } else {
+    header2.classList.remove("sticky");
+  }
+}
+        </script>  
+<script>
+var pc0;
+    
+
+    
+d3.csv('https://gist.githubusercontent.com/Dhvani-Katkoria/b66e2d8b863a65ac2b49bdffe6736ae1/raw/522d2e5f985d9eeb75055785ead30b38a26b54ae/countries.csv', function(data) {
+
+    var blue_to_brown = d3.scale.ordinal()
+  .domain(["BALTICS","NORTHERN AMERICA","NORTHERN AFRICA","EASTERN EUROPE","C.W. OF IND. STATES","NEAR EAST","OCEANIA","ASIA (EX. NEAR EAST0","WESTERN EUROPE","LATIN AMER. & CARIB","SUB-SAHARAN AFRICA"])
+  .range(['steelblue', 'brown','red','green','black','yellow', 'gray','orange','blue','magenta','pink']);
+//   .interpolate(d3.interpolateLab);
+    
+// var colorgen = d3.scale.category10();
+//   var colors = {};
+//   _(data).chain()
+//     .pluck('group')
+//     .uniq()
+//     .each(function(d,i) {
+//       colors[d] = colorgen(i);
+//     });
+//   var color = function(d) { return colors[d.Region]; };
+    var color = function(d) { return blue_to_brown(d['Region']); };
+   
+    
+pc0 = d3.parcoords()("#example")
+  .data(data)
+//     .bundlingStrength(0) // set bundling strength
+//     .smoothness(0)
+//     .bundleDimension("cylinders")
+    .showControlPoints(false)
+    .color(color)
+    .hideAxis(["Country"])
+    .alpha(0.4)
+    .render()
+    .interactive()
+    .brushMode("1D-axes")
+    .reorderable()
+    ;
+
+
+    // smoothness
+//     d3.select("#smoothness").on("change", function() {
+//         d3.select("#smooth").text(this.value);
+//         pc0.smoothness(this.value).render();
+//     });
+
+    // bundling strength slider
+//     d3.select("#bundling").on("change", function() {
+//         d3.select("#strength").text(this.value);
+//         pc0.bundlingStrength(this.value).render();
+//     });
+
+//     var select = d3.select("#bundleDimension").append("select").on("change", changeBundle);
+
+//     var options = select.selectAll('option')
+//         .data(pc0.dimensions().concat(pc0.hideAxis()));
+
+//     options
+//         .enter()
+//         .append("option")
+//         .attr("value", function(d) {return d;})
+//         .text(function(d) {return d;});
+
+//     function changeBundle() {
+//         pc0.bundleDimension(this.value);
+//     }
+    
+      var grid = d3.divgrid();
+  d3.select("#grid")
+    .datum(data.slice(0))
+    .call(grid)
+    .selectAll(".row")
+    .on({
+      "mouseover": function(d) { pc0.highlight([d]) },
+      "mouseout": pc0.unhighlight
+    });
+
+  // update data table on brush event
+  pc0.on("brush", function(d) {
+    d3.select("#grid")
+      .datum(d.slice(0))
+      .call(grid)
+      .selectAll(".row")
+      .on({
+        "mouseover": function(d) { pc0.highlight([d]) },
+        "mouseout": pc0.unhighlight
+      });
+  });
+
+});
+    </script>
+</body>
